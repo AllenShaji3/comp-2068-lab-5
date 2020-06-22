@@ -3,7 +3,11 @@ const Superhero = require('../models/superhero');
 
 exports.index = async (req, res) => {
   try {
-    
+    const superhero = await Superhero.find();
+    res.render(`${viewPath}/index`), {
+      pageTitle: '',
+      superhero: superhero
+    }
   } catch (error) {
     req.flash('danger', 'There was an issue fetching the superheroes list');
     res.redirect('/');
@@ -15,7 +19,7 @@ exports.show = async (req, res) => {
     const superhero = await Superhero.findById(req.params.id);
 
     res.render(`${viewPath}/show`, {
-      pageTitle: 'Superhero',
+      pageTitle: '',
       superhero: superhero
     });
   } catch (error) {
